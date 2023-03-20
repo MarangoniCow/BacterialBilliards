@@ -1,28 +1,33 @@
+% EXAMPLES
+% Common args
+P = [2*rand; 2*rand] - 1;
+P = P./norm(P);
+X = [rand; rand];
 
-r = 5*ones(1, 1000);
-v = linspace(0, 24*pi, 1000);
+
+% CIRCLE OF RADIUS 5 EXAMPLE
 r = 5;
 t = linspace(0, 2*pi, 1000);
 x = r.*cos(t);
-y = (r + 2*sin(5*t)).*sin(t)
-% y = r.*sin(t);
-
-
-x = [linspace(-1, 1), linspace(1, 1), linspace(1, -1), linspace(-1, -1)];
-y = [linspace(1, 1), linspace(1, -1), linspace(-1, -1), linspace(-1, 1)];
-
-% x = linspace(-100, 100, 100);
-% x = [x, x];
-% y = [r*ones(1, 100), -r*ones(1, 100)];
+y = r.*sin(t);
 boundary = [x; y];
-
-
-p = [2*rand; 2*rand] - 1;
-% p = [1; 1];
-p = p./sqrt(p(1)^2 + p(2)^2);
-
-x = [2*rand; 2*rand] - 1;
-
-
-[x, y] = fetchIntersectPoints(boundary, 'initialPoint', x, 'initialTrajectory', p);
+[x, y] = fetchIntersectPoints(boundary, 'initialPoint', X, 'initialTrajectory', P);
 renderBacteriaPaths(boundary, x, y);
+
+% TRIANGLE EXAMPLE
+x = [linspace(-5, 0), linspace(0, 5), linspace(5, -5, 200)];
+y = [linspace(0, 5), linspace(5, 0), zeros(1, 200)];
+boundary = [x; y];
+[x, y] = fetchIntersectPoints(boundary, 'initialPoint', X, 'initialTrajectory', P);
+renderBacteriaPaths(boundary, x, y);
+
+% OTHER EXAMPLE
+r = 5*ones(1, 1000);
+v = linspace(0, 24*pi, 1000);
+x = r.*cos(t);
+y = (r + cos(v)).*sin(t);
+boundary = [x; y];
+[x, y] = fetchIntersectPoints(boundary, 'initialPoint', X, 'initialTrajectory', P);
+renderBacteriaPaths(boundary, x, y);
+
+

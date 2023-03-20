@@ -171,7 +171,12 @@ function [x, y] = fetchIntersectPoints(boundary, varargin)
         theta_r = pi/2 - A;
 
         % And the reflection angle
-        theta_i = theta_r;
+        if theta_r > deg2rad(45)
+            theta_i = 0.9*theta_r;
+        else
+            theta_i = deg2rad(45);
+        end
+
         
         % Next, we calculate the polar angle of the normal in our frame of reference
         phi_N = cart2pol(s*N(1), s*N(2));
